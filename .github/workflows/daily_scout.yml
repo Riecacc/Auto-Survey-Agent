@@ -4,6 +4,15 @@ on:
   schedule:
     - cron: "17 1 * * *" # UTC 01:17，约北京时间 09:17
   workflow_dispatch:
+    inputs:
+      command:
+        description: 运行模式（定时运行时固定为 all）
+        type: choice
+        default: all
+        options:
+          - all      # 先处理 ✅ 确认，再抓取新论文
+          - confirm  # 仅轮询 ✅ 并收录到 paperlist
+          - scout    # 仅抓取 + 打分 + 推送 Slack 候选
 
 permissions:
   contents: write
@@ -13,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout（含 paperlist submodule）
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           token: ${{ secrets.PAPERLIST_PAT }}
           submodules: recursive
@@ -24,7 +33,7 @@ jobs:
           git -C paperlist remote set-url origin "https://x-access-token:${{ secrets.PAPERLIST_PAT }}@github.com/Riecacc/Awesome-Physical-AI-Infra-Papers.git"
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -42,7 +51,7 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
-        run: python src/main.py all
+        run: python src/main.py ${{ github.event.inputs.command || 'all' }}
 
       # 先推 paperlist，再让主仓库记录新的 submodule 指针，
       # 避免出现主仓库指向远端尚不存在的 commit 的时间窗

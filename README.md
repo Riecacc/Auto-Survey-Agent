@@ -126,8 +126,10 @@ paperlist 更新机制：确认的论文追加到 `paperlist/README.md` 的 Pape
 
 1. 配好 secret 后，仓库 **Actions** 标签页 → **Daily Paper Scout** → **Run workflow** 手动触发；
 2. 成功标志：Slack 收到若干论文卡片，仓库出现 `chore: update scout state...` 自动提交；
-3. 给任意一条卡片打 **✅**，再手动 Run 一次：该论文应被追加到 paperlist 仓库 README 的表格中，原消息线程回复"已收录到 paper list ✅"；
-4. 之后每天定时自动运行；给卡片打 ✅ 后最迟次日收录，也可随时手动 Run workflow 立即处理。
+3. 给任意一条卡片打 **✅**，再手动 Run 一次（**运行模式下拉选 `confirm`**，只做收录、不重新搜索）：该论文应被追加到 paperlist 仓库 README 的表格中，原消息线程回复"已收录到 paper list ✅"；
+4. 之后每天定时自动运行；给卡片打 ✅ 后最迟次日收录，也可随时手动 Run workflow（选 `confirm`）立即处理。
+
+手动触发时可选三种模式：`all`（默认，确认 + 搜索）、`confirm`（仅收录 ✅ 的论文）、`scout`（仅搜索推送候选）。定时运行固定为 `all`。
 
 ## 本地运行
 
