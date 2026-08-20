@@ -1,0 +1,6 @@
+{
+  "arxiv_categories": ["cs.RO", "cs.AI", "cs.LG", "cs.CV"],
+  "keywords": ["vision-language-action", "robot learning", "robot foundation model", "world model", "sim2real", "simulation", "embodied AI", "manipulation", "locomotion", "teleoperation"],
+  "lookback_days": 2,
+  "max_results": 50
+}

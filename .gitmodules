@@ -1,0 +1,3 @@
+[submodule "paperlist"]
+	path = paperlist
+	url = git@github.com:Riecacc/Awesome-Physical-AI-Infra-Papers.git
