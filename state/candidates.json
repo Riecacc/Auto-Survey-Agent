@@ -2,7 +2,7 @@
   {
     "arxiv_id": "2608.18948",
     "slack_ts": "1787234292.708749",
-    "status": "pending",
+    "status": "confirmed",
     "score": 9,
     "title": "RoboEdit: Turning Human Manipulation Videos into Scalable Robot Experience",
     "venue": null,
@@ -17,7 +17,7 @@
   {
     "arxiv_id": "2608.18234",
     "slack_ts": "1787234292.929239",
-    "status": "pending",
+    "status": "confirmed",
     "score": 9,
     "title": "GigaBrain-WBC-0.5: A Behavior World Model for Robust Whole-Body Control with Environment Interaction",
     "venue": null,
@@ -32,7 +32,7 @@
   {
     "arxiv_id": "2608.18077",
     "slack_ts": "1787234293.294799",
-    "status": "pending",
+    "status": "confirmed",
     "score": 9,
     "title": "Hydra-0: Action Flow for Generalist World Modeling and Control",
     "venue": null,
@@ -47,7 +47,7 @@
   {
     "arxiv_id": "2608.18787",
     "slack_ts": "1787234293.460969",
-    "status": "pending",
+    "status": "confirmed",
     "score": 8,
     "title": "Dream2Reward: Transition-Alignment Reward Models from Positive Demonstrations for Robotic Manipulation",
     "venue": null,
@@ -62,7 +62,7 @@
   {
     "arxiv_id": "2608.18552",
     "slack_ts": "1787234294.057269",
-    "status": "pending",
+    "status": "confirmed",
     "score": 8,
     "title": "Real-Time Control-Constrained DDP for Underactuated Balancing of Legged Robots",
     "venue": "IEEE Robotics and Automation Letters",
