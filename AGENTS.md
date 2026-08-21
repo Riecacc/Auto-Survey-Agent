@@ -4,7 +4,7 @@
 
 ## 项目概述
 
-每日论文巡检 agent：GitHub Actions 定时从 arXiv 抓取 Physical AI Infra 方向论文，Kimi API 打分筛选，Slack 推送候选，用户打 ✅ 确认后收录进 `paperlist/` submodule 对应的 awesome list 仓库并可选发推。
+每日论文巡检 agent：GitHub Actions 定时从 arXiv 抓取 Physical AI Systems / Infra 方向论文，Kimi API 打分筛选，Slack 推送候选，用户打 ✅ 确认后收录进 `paperlist/` submodule 对应的研究图谱仓库并可选发推。
 
 ## 硬性技术约束
 
@@ -14,18 +14,19 @@
 
 ## 目录结构与模块职责
 
-- `config/scout.json` — 检索配置唯一数据源（分类/关键词/回溯天数/条数上限）。**修改它时需同步更新 `skills/paper-scout/SKILL.md` 的领域描述**。
+- `config/scout.json` — 检索配置唯一数据源（分类/`keyword_groups` 分组关键词（subjects×aspects 取交集）/回溯天数/条数上限）。**修改它时需同步更新 `skills/paper-scout/SKILL.md` 的领域描述**。
 - `skills/paper-scout/SKILL.md` — 检索领域定义，供人/agent 阅读。
-- `skills/paper-ranking/SKILL.md` — 评估规则，**全文会作为 Kimi 打分的 system prompt**，改动直接影响打分行为。
+- `skills/paper-ranking/SKILL.md` — 评估规则（两步：先方向归属判定再打分；milestone 方向高门槛），**全文会作为 Kimi 打分的 system prompt**（方向清单由 `rank_papers.py` 从 taxonomy.json 动态追加），改动直接影响打分行为。
 - `src/main.py` — 入口，`scout` / `confirm` / `all` 三个子命令（all = 先 confirm 后 scout）。
 - `src/common.py` — HTTP 封装（urllib）、`state/` 读写、环境变量读取。
-- `src/fetch_papers.py` — arXiv API + Semantic Scholar batch 补充（429 重试 3 次、失败跳过不中断）。
-- `src/rank_papers.py` — Kimi 调用，每批 10 篇，解析失败降级跳过该批。
+- `src/fetch_papers.py` — arXiv API（`(cats) AND (subjects) AND (aspects)` 查询）+ Semantic Scholar batch 补充（429 重试 3 次、失败跳过不中断）。
+- `src/rank_papers.py` — Kimi 调用，每批 10 篇，解析失败降级跳过该批；加载 `paperlist/data/taxonomy.json` 注入方向清单（缺失时降级为不带方向清单并警告）；过滤分层：候选 directions 全为 milestone 方向时需 score≥9 且 `milestone_reason` 非空，其余沿用 `SCORE_THRESHOLD`。
 - `src/slack_notify.py` — 候选卡片发送、✅ reaction 轮询、线程回复；`resolve_channel()` 支持频道（`SLACK_CHANNEL_ID`）与私信（`SLACK_USER_ID`）两种目标。
-- `src/update_paperlist.py` — 只改 `paperlist/README.md` 文件，**不执行任何 git 命令**（git 操作全在 workflow 里）。
+- `src/curate_paperlist.py` — `ingest()` 把确认论文追加进 `paperlist/data/papers.json`（GitHub 仓库且有 `PAPERLIST_PAT` 时抓 star 快照，失败只警告）；`ingest_review()` 收录人工确认过的 backfill/seed 条目（id 允许 `dblp:<key>` 兜底）；`render()` 从 `data/*.json` 重新生成全部 markdown（根 README、`papers/` 方向页按 taxonomy 的 `subdirections` 分子类分节、LATEST、`venues/` 年份×会议索引，起始年随最早论文动态扩展、`groups/` 研究组索引）。**不执行任何 git 命令**（git 操作全在 workflow 里）。
 - `src/post_x.py` — OAuth 1.0a 标准库发推；凭证缺失或 HTTP 错误只警告不抛异常。
+- `src/backfill_venues.py` — 历史回填工具（独立 CLI，不在每日 workflow 里）：DBLP 拉系统/架构顶会 2024 至今论文（`f` 参数分页，单页上限 100），本地关键词初筛（不耗 Kimi 配额）+ Kimi 精筛，产出 `state/backfill_review.json` 待人工确认，确认后经 `curate_paperlist.ingest_review()` 入库；`seed` 子命令补全种子清单元数据到 `state/seed_review.json`。
 - `state/` — `seen.json`（去重，上限 2000 条淘汰最旧）、`candidates.json`（候选与确认状态）。由 workflow 提交回仓库。
-- `paperlist/` — git submodule（Riecacc/Awesome-Physical-AI-Infra-Papers）。
+- `paperlist/` — git submodule（Riecacc/Awesome-Physical-AI-Infra-Papers）。`data/papers.json`（论文记录，含 directions/subdirections/tags/score 等）+ `data/taxonomy.json`（6 方向 × 子类，core/milestone 分层）+ `data/groups.json`（领先研究组，人工 curated）为全部内容源；`papers/`、`venues/`、`groups/`、根 README 均由 `render()` 生成。已完成 2024 至今系统/架构顶会回填 + 里程碑种子入库。
 
 ## 关键设计决策（改动前先想清楚为什么存在）
 
@@ -36,6 +37,7 @@
 5. **Kimi 双 endpoint**：开放平台 `api.moonshot.cn`（按量付费，模型 ID 如 `kimi-k3`）与 Coding Plan `api.kimi.com/coding/v1`（订阅，模型 ID 如 `k3-256k`）通过 `KIMI_API_URL`/`KIMI_MODEL` 切换，代码与两者兼容。
 6. **workflow 中 git 推送顺序固定**：先 push paperlist 远端，再提交主仓库的 `state/` + submodule 指针。颠倒顺序会让主仓库短暂指向远端不存在的 commit。
 7. **X 发推永不中断流水线**：任何失败只打印警告。
+8. **paperlist 的 `data/*.json` 是唯一数据源**：所有 markdown（根 README、`papers/`、`venues/`）全部由 `render()` 生成，禁止手改表格内容；收录只追加 `data/papers.json` 再整页重渲。
 
 ## 常用命令
 

@@ -1,6 +1,9 @@
 {
-  "arxiv_categories": ["cs.RO", "cs.AI", "cs.LG", "cs.CV"],
-  "keywords": ["vision-language-action", "robot learning", "robot foundation model", "world model", "sim2real", "simulation", "embodied AI", "manipulation", "locomotion", "teleoperation"],
+  "arxiv_categories": ["cs.RO", "cs.AR", "cs.DC", "cs.LG", "cs.AI", "cs.CV", "cs.OS"],
+  "keyword_groups": {
+    "subjects": ["vision-language-action", "VLA", "world model", "robot foundation model", "embodied AI", "robot policy"],
+    "aspects": ["serving", "inference", "runtime", "accelerator", "real-time", "edge deployment", "quantization", "pruning", "speculative", "scheduling", "hardware"]
+  },
   "lookback_days": 2,
   "max_results": 50
 }

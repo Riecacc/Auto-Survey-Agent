@@ -51,6 +51,7 @@ jobs:
           X_API_SECRET: ${{ secrets.X_API_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          PAPERLIST_PAT: ${{ secrets.PAPERLIST_PAT }}
         run: python src/main.py ${{ github.event.inputs.command || 'all' }}
 
       # 先推 paperlist，再让主仓库记录新的 submodule 指针，
@@ -58,7 +59,7 @@ jobs:
       - name: 推送 paperlist
         run: |
           cd paperlist
-          git add README.md
+          git add -A
           git diff --cached --quiet || (git -c user.name="github-actions[bot]" -c user.email="github-actions[bot]@users.noreply.github.com" commit -m "Add confirmed papers" && git push origin main)
 
       - name: 提交 state/ 与 submodule 指针

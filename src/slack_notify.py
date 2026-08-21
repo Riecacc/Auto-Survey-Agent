@@ -99,6 +99,7 @@ def post_candidates(papers):
             "status": "pending",
             "score": paper.get("score"),
             "title": paper["title"],
+            "authors": paper.get("authors"),
             "venue": paper.get("venue"),
             "max_author_hindex": paper.get("max_author_hindex"),
             "citation_count": paper.get("citation_count"),
@@ -106,6 +107,9 @@ def post_candidates(papers):
             "summary_zh": paper.get("summary_zh"),
             "reason": paper.get("reason"),
             "tweet_en": paper.get("tweet_en"),
+            "directions": paper.get("directions"),
+            "tags": paper.get("tags"),
+            "milestone_reason": paper.get("milestone_reason"),
             "published": paper.get("published"),
         })
         print(f"[info] 已推送候选 {paper['arxiv_id']}: {paper['title']}")

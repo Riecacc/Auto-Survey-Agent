@@ -13,7 +13,7 @@ from src.fetch_papers import fetch_new_papers
 from src.post_x import post_tweet
 from src.rank_papers import rank_papers
 from src.slack_notify import check_confirmations, post_candidates, reply_in_thread
-from src.update_paperlist import add_papers
+from src.curate_paperlist import ingest, render
 
 SEEN_MAX_ENTRIES = 2000
 
@@ -72,7 +72,9 @@ def cmd_confirm():
         print("[info] 没有已确认的候选，confirm 结束")
         return
     print(f"[info] 共 {len(confirmed)} 篇候选被确认")
-    paperlist_changed = add_papers(confirmed)
+    paperlist_changed = ingest(confirmed)
+    if paperlist_changed:
+        render()
     for c in confirmed:
         if c.get("tweet_en"):
             post_tweet(c["tweet_en"])

@@ -1,6 +1,6 @@
 # Auto-Survey-Agent
 
-每日论文巡检 agent：自动抓取 Physical AI Infra（机器人基础设施）方向的最新论文，用大模型打分筛选，推送到 Slack 等待人工确认，确认后收录进论文列表并可选发推。纯 Python 标准库实现，无任何 pip 依赖。
+每日论文巡检 agent：自动抓取 Physical AI Systems / Infra（VLA/世界模型的系统与基础设施）方向的最新论文，用大模型打分筛选，推送到 Slack 等待人工确认，确认后收录进论文图谱并可选发推。纯 Python 标准库实现，无任何 pip 依赖。
 
 ## 架构与流程
 
@@ -10,7 +10,7 @@
 arXiv API ──> 去重(state/seen.json) ──> Semantic Scholar 补充元数据
       │
       ▼
-Kimi (Moonshot) API 按评估规则打分（≥ 阈值进入候选）
+Kimi (Moonshot) API 按评估规则打分（先判定 6 方向归属再打分，分层门槛过滤）
       │
       ▼
 每篇候选发一条独立 Slack 消息（ts 存入 state/candidates.json）
@@ -19,7 +19,8 @@ Kimi (Moonshot) API 按评估规则打分（≥ 阈值进入候选）
 下一次运行（或手动触发）轮询 Slack reactions
       │
       ▼
-确认的论文：追加进 paperlist/README.md 表格 ──> 尝试发推（X 凭证缺失时跳过）
+确认的论文：追加进 paperlist data/papers.json ──> render() 重新生成全部 markdown
+      │                                        └──> 尝试发推（X 凭证缺失时跳过）
       │                                        └──> Slack 线程回复"已收录"
       ▼
 state/ 与更新后的 paperlist submodule 指针提交回主仓库；paperlist 修改直接 push 到其 main
@@ -27,12 +28,12 @@ state/ 与更新后的 paperlist submodule 指针提交回主仓库；paperlist 
 
 目录结构：
 
-- `config/scout.json` — 检索配置的唯一数据源（arXiv 分类、关键词、回溯天数、最大结果数）
+- `config/scout.json` — 检索配置的唯一数据源（arXiv 分类、`keyword_groups` 分组关键词（subjects × aspects 取交集）、回溯天数、最大结果数）
 - `skills/paper-scout/SKILL.md` — 检索领域定义与渠道规则
-- `skills/paper-ranking/SKILL.md` — 影响力评估规则（作为打分模型的 system prompt）
+- `skills/paper-ranking/SKILL.md` — 评估规则（作为打分模型的 system prompt；方向清单由代码从 `paperlist/data/taxonomy.json` 动态注入）
 - `src/` — 全部实现代码（标准库 only）
 - `state/` — 运行状态（`seen.json` 去重记录、`candidates.json` 候选与确认状态），由 workflow 提交回仓库
-- `paperlist/` — git submodule，论文列表仓库（[Awesome-Physical-AI-Infra-Papers](https://github.com/Riecacc/Awesome-Physical-AI-Infra-Papers)）
+- `paperlist/` — git submodule，论文图谱仓库（[Awesome-Physical-AI-Infra-Papers](https://github.com/Riecacc/Awesome-Physical-AI-Infra-Papers)），`data/*.json` 为唯一数据源，全部 markdown 由 `render()` 生成：`papers/` 按 6 方向 × 子类（`subdirections`）组织、`venues/` 年份 × 会议索引、`groups/` 领先研究组与生态索引
 
 设计要点：
 
@@ -58,7 +59,7 @@ state/ 与更新后的 paperlist submodule 指针提交回主仓库；paperlist 
 | `KIMI_API_KEY` | 是 | 按量付费用户在 [Moonshot 开放平台](https://platform.moonshot.cn/) 创建 API Key；**Coding Plan 订阅用户**在 [Kimi Code Console](https://www.kimi.com/code/console) 创建（最多 5 个 key，**只显示一次，当场保存**） |
 | `KIMI_API_URL` | 否 | API 地址。默认开放平台 `https://api.moonshot.cn/v1/chat/completions`；**Coding Plan 用户必须设为** `https://api.kimi.com/coding/v1/chat/completions` |
 | `KIMI_MODEL` | 否 | 打分模型。默认 `kimi-k3`；**Coding Plan 用户设为** `k3-256k` |
-| `SCORE_THRESHOLD` | 否 | 入选分数阈值（1-10），默认 `7` |
+| `SCORE_THRESHOLD` | 否 | 入选分数阈值（1-10），默认 `7`，仅 core 方向适用；milestone 方向固定要求 ≥9 |
 | `SLACK_BOT_TOKEN` | 是 | 见下方「Slack 配置」 |
 | `SLACK_CHANNEL_ID` | 二选一 | 发频道时用：频道 ID（`C`/`G` 开头，频道详情页底部可见） |
 | `SLACK_USER_ID` | 二选一 | **发私信时用**：个人资料页 ⋯ → Copy member ID（`U` 开头）。两个都填时优先用频道 |
@@ -114,7 +115,7 @@ workflow 默认的 `GITHUB_TOKEN` 无法推送外部仓库，需创建 fine-grai
 3. **Permissions** 中 **Contents 设为 Read and write**；
 4. 建议有效期 90 天或 1 年。**PAT 到期当天 workflow 会在 push 步骤报 401/403**，届时重新生成并更新 secret 即可。
 
-paperlist 更新机制：确认的论文追加到 `paperlist/README.md` 的 Papers 表格（日期 / 标题带 arXiv 链接 / venue / 代码链接，按 arXiv id 去重），直接 push 到该仓库 `main`；随后主仓库提交 `state/` 与**更新后的 submodule 指针**，保证两边一致。
+paperlist 更新机制：确认的论文先追加到 `paperlist/data/papers.json`（唯一数据源，按 arXiv id 去重），随后 `render()` 从 `data/papers.json` + `data/taxonomy.json` + `data/groups.json` 重新生成全部 markdown（根 README 概览、`papers/` 方向页按子类分节与最新收录、`venues/` 年份×会议索引、`groups/` 研究组索引），直接 push 到该仓库 `main`；随后主仓库提交 `state/` 与**更新后的 submodule 指针**，保证两边一致。
 
 ### X 配置（可选）
 
@@ -126,7 +127,7 @@ paperlist 更新机制：确认的论文追加到 `paperlist/README.md` 的 Pape
 
 1. 配好 secret 后，仓库 **Actions** 标签页 → **Daily Paper Scout** → **Run workflow** 手动触发；
 2. 成功标志：Slack 收到若干论文卡片，仓库出现 `chore: update scout state...` 自动提交；
-3. 给任意一条卡片打 **✅**，再手动 Run 一次（**运行模式下拉选 `confirm`**，只做收录、不重新搜索）：该论文应被追加到 paperlist 仓库 README 的表格中，原消息线程回复"已收录到 paper list ✅"；
+3. 给任意一条卡片打 **✅**，再手动 Run 一次（**运行模式下拉选 `confirm`**，只做收录、不重新搜索）：该论文应被收录进 paperlist 仓库 `data/papers.json` 并重新生成对应方向页等 markdown，原消息线程回复"已收录到 paper list ✅"；
 4. 之后每天定时自动运行；给卡片打 ✅ 后最迟次日收录，也可随时手动 Run workflow（选 `confirm`）立即处理。
 
 手动触发时可选三种模式：`all`（默认，确认 + 搜索）、`confirm`（仅收录 ✅ 的论文）、`scout`（仅搜索推送候选）。定时运行固定为 `all`。
@@ -140,11 +141,22 @@ python src/main.py scout      # 仅抓取 + 打分 + 推送候选
 python src/main.py confirm    # 仅轮询确认并收录
 ```
 
+历史回填（独立工具，不在每日 workflow 里）：
+
+```bash
+python src/backfill_venues.py fetch   # DBLP 拉系统/架构顶会 2024 至今论文 + 本地关键词初筛
+python src/backfill_venues.py rank    # Kimi 精筛初筛清单，产出 state/backfill_review.json（需 KIMI_API_KEY）
+python src/backfill_venues.py seed <清单.json>   # 种子清单补全 arXiv 元数据 → state/seed_review.json
+# 人工确认 review 文件后，用 curate_paperlist.ingest_review() 批量入库并 render()
+```
+
+调试抓取范围可用环境变量 `BACKFILL_VENUES="ISCA,MICRO"`、`BACKFILL_YEARS="2024"` 缩小。
+
 ## 如何调整
 
-- **修改检索领域**：编辑 `config/scout.json` 中的 `arxiv_categories` 与 `keywords`，并同步更新 `skills/paper-scout/SKILL.md` 中的领域描述。
-- **修改评估规则**：编辑 `skills/paper-ranking/SKILL.md`，该文件全文会作为打分模型的 system prompt。
-- **调整入选阈值**：设置 `SCORE_THRESHOLD` secret（默认 7）。
+- **修改检索领域**：编辑 `config/scout.json` 中的 `arxiv_categories` 与 `keyword_groups`（`subjects` 限定研究对象、`aspects` 限定系统/效率侧面，两组取交集），并同步更新 `skills/paper-scout/SKILL.md` 中的领域描述。
+- **修改评估规则**：编辑 `skills/paper-ranking/SKILL.md`，该文件全文会作为打分模型的 system prompt（6 方向清单由代码从 `paperlist/data/taxonomy.json` 动态追加）。milestone 方向（04/05）适用高门槛：score ≥ 9 且必须给出 `milestone_reason`。
+- **调整入选阈值**：设置 `SCORE_THRESHOLD` secret（默认 7，仅 core 方向适用）。
 - **切换 Kimi 计费方式/模型**：改 `KIMI_API_URL`、`KIMI_MODEL`、`KIMI_API_KEY` 三个 secret，代码无需改动。
 
 ## 已知限制

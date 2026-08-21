@@ -26,13 +26,19 @@ def load_scout_config():
 
 
 def build_arxiv_query(config):
-    """组合 arXiv search_query：(cat:X OR cat:Y) AND (all:kw1 OR all:kw2 ...) AND submittedDate:[...]。"""
+    """组合 arXiv search_query：(cats OR) AND (subjects OR) AND (aspects OR) AND submittedDate:[...]。
+
+    subjects 限定研究对象（VLA / 世界模型 / 具身智能等），aspects 限定系统与效率侧面
+    （serving / 加速器 / 量化等），两组取交集以聚焦 Physical AI Systems / Infra。
+    """
     cats = " OR ".join(f"cat:{c}" for c in config["arxiv_categories"])
-    kws = " OR ".join(f'all:"{k}"' for k in config["keywords"])
+    groups = config["keyword_groups"]
+    subjects = " OR ".join(f'all:"{k}"' for k in groups["subjects"])
+    aspects = " OR ".join(f'all:"{k}"' for k in groups["aspects"])
     end = datetime.now(timezone.utc)
     start = end - timedelta(days=config["lookback_days"])
     date_range = f"submittedDate:[{start:%Y%m%d}0000 TO {end:%Y%m%d}2359]"
-    return f"({cats}) AND ({kws}) AND {date_range}"
+    return f"({cats}) AND ({subjects}) AND ({aspects}) AND {date_range}"
 
 
 def extract_arxiv_id(id_url):
@@ -46,7 +52,8 @@ def extract_code_url(text):
     if not text:
         return None
     m = GITHUB_URL_RE.search(text)
-    return m.group(0) if m else None
+    # 句点既可能属于仓库名也可能是句尾标点，去掉末尾句点
+    return m.group(0).rstrip(".") if m else None
 
 
 def parse_arxiv_feed(xml_bytes):
