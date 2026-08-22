@@ -77,7 +77,7 @@
   {
     "arxiv_id": "2608.19188",
     "slack_ts": "1787234294.284989",
-    "status": "pending",
+    "status": "confirmed",
     "score": 7,
     "title": "PartialBiGrasp: Inferring Hidden Local Geometry for Bimanual Grasping from Partial Views",
     "venue": null,
@@ -542,7 +542,7 @@
   {
     "arxiv_id": "2608.19589",
     "slack_ts": "1787280126.541119",
-    "status": "pending",
+    "status": "confirmed",
     "score": 7,
     "title": "OrthoSkillVLA: Continual Skill Learning via Gradient-Informed Skill Subspace Adaptation",
     "venue": null,
