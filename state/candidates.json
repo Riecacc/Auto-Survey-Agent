@@ -553,5 +553,45 @@
     "reason": "针对VLA持续技能学习的参数高效框架，对VLM与ActionHead分别施加子空间约束，问题分析有洞察，PRCV接收属中等venue。",
     "tweet_en": "OrthoSkillVLA: continual skill learning for VLA models via separate subspace constraints on VLM & ActionHead plus a feature-aware MoE decoder — no replay, no forgetting. https://arxiv.org/abs/2608.19589",
     "published": "2026-08-20T03:10:31Z"
+  },
+  {
+    "arxiv_id": "2608.23565",
+    "slack_ts": "1787625253.009489",
+    "status": "pending",
+    "score": 7,
+    "title": "ReWorld: An Interactive World Model with Long-Horizon Memory",
+    "authors": [
+      "Zhifei Chen",
+      "Luozhou Wang",
+      "Guibao Shen",
+      "Dongyu Yan",
+      "Shuai Yang",
+      "Tianshuo Xu",
+      "Yihua Du",
+      "Wei Wang",
+      "Tianyi Gui",
+      "Lianghua Huang",
+      "Yingcong Chen"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "ReWorld 提出控制与记忆分离的交互式世界模型：训练时用混合注意力窗口与随机 head 路由解耦短时控制与长时记忆，推理时以位姿索引地标库支撑固定预算 KV 缓存。配合 LoRA 分布匹配蒸馏将采样压缩至 4 步，同一骨干同时支持高保真多步模式与实时交互模式，分钟级 rollout 仍能回忆起始画面。",
+    "reason": "交互式世界模型的推理侧系统设计扎实：混合注意力窗口+位姿索引地标库实现固定预算KV缓存，LoRA蒸馏压缩至4步采样，兼顾长时记忆与实时流式生成，效率与系统贡献明确。",
+    "tweet_en": "ReWorld: an interactive world model with long-horizon memory under a fixed inference budget — mixed attention windows + pose-indexed landmark KV cache + 4-step LoRA distillation for real-time 704x1280 streaming https://arxiv.org/abs/2608.23565",
+    "directions": [
+      "01-vla-wam-systems-serving",
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "world-model",
+      "kv-cache",
+      "distillation",
+      "real-time-streaming",
+      "long-horizon-memory"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-24T17:59:05Z"
   }
 ]
