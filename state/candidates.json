@@ -557,7 +557,7 @@
   {
     "arxiv_id": "2608.23565",
     "slack_ts": "1787625253.009489",
-    "status": "pending",
+    "status": "confirmed",
     "score": 7,
     "title": "ReWorld: An Interactive World Model with Long-Horizon Memory",
     "authors": [
@@ -593,5 +593,77 @@
     ],
     "milestone_reason": "",
     "published": "2026-08-24T17:59:05Z"
+  },
+  {
+    "arxiv_id": "2608.24199",
+    "slack_ts": "1787712085.329719",
+    "status": "pending",
+    "score": 8,
+    "title": "NVIDIA Cosmos-H-Dreams: Real-Time Generative Physics Simulation for Surgical Robotics",
+    "authors": [
+      "Javier Gamazo Tejero",
+      "Lukas Zbinden",
+      "Keyur Sheth",
+      "Raghavendra K M",
+      "Nadim Daher",
+      "Diego Granero Maraña",
+      "Filip Binkiewicz",
+      "Patrick Thornycroft",
+      "Mahdi Azizian",
+      "Sean D. Huver"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "Cosmos-H-Dreams 将动作条件手术视频世界模型经教师-学生蒸馏转化为可控实时模拟器，在单张 RTX PRO 6000 上达 ~160 FPS，支持键盘、VR、手术机器人控制台与闭环策略的实时交互控制。",
+    "reason": "将手术世界模型通过 Self Forcing 蒸馏为因果少步学生并基于流式推理库实现单卡 ~160 FPS 实时交互，是 fast WAM 与实时 serving 的扎实系统工作，且开放发布。",
+    "tweet_en": "Cosmos-H-Dreams: first interactive surgical world model — distilled few-step student streams ~160 FPS on a single GPU, controllable by humans or policies in real time. https://arxiv.org/abs/2608.24199",
+    "directions": [
+      "03-vla-wam-efficient-algorithms",
+      "01-vla-wam-systems-serving"
+    ],
+    "tags": [
+      "world-model",
+      "distillation",
+      "real-time-simulation",
+      "surgical-robotics",
+      "streaming-inference"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-25T08:09:40Z"
+  },
+  {
+    "arxiv_id": "2608.24115",
+    "slack_ts": "1787712085.519719",
+    "status": "pending",
+    "score": 8,
+    "title": "PonderPounce: A Pretrained MLLM as an Episode Context Engine for Robot Control",
+    "authors": [
+      "Suhwan Choi",
+      "Jaeyoon Jung",
+      "Sungkyung Kim",
+      "Yunsung Lee",
+      "Youngjae Yu"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "PonderPounce 复用 MLLM 原生因果上下文作为机器人情景记忆，System2 异步生成认知 token 供 System1 VLA 消费，优化后支持 20Hz 动作回放，在 RoboMME 上大幅超越基线。",
+    "reason": "System2 MLLM 与 System1 VLA 异步协同架构，明确优化 serving 延迟（认知刷新 78ms、动作调用 25ms、20Hz 回放），契合 VLA serving 与实时控制方向。",
+    "tweet_en": "PonderPounce: reuse an MLLM's causal context as robot episodic memory — async System2/System1 interface with 78ms cognition refresh, 25ms action calls at 20Hz. https://arxiv.org/abs/2608.24115",
+    "directions": [
+      "01-vla-wam-systems-serving"
+    ],
+    "tags": [
+      "vla-serving",
+      "async-inference",
+      "episodic-memory",
+      "dual-system",
+      "low-latency"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-25T06:24:36Z"
   }
 ]
