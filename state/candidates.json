@@ -597,7 +597,7 @@
   {
     "arxiv_id": "2608.24199",
     "slack_ts": "1787712085.329719",
-    "status": "pending",
+    "status": "confirmed",
     "score": 8,
     "title": "NVIDIA Cosmos-H-Dreams: Real-Time Generative Physics Simulation for Surgical Robotics",
     "authors": [
@@ -636,7 +636,7 @@
   {
     "arxiv_id": "2608.24115",
     "slack_ts": "1787712085.519719",
-    "status": "pending",
+    "status": "confirmed",
     "score": 8,
     "title": "PonderPounce: A Pretrained MLLM as an Episode Context Engine for Robot Control",
     "authors": [
@@ -665,5 +665,116 @@
     ],
     "milestone_reason": "",
     "published": "2026-08-25T06:24:36Z"
+  },
+  {
+    "arxiv_id": "2608.26067",
+    "slack_ts": "1787829274.528329",
+    "status": "pending",
+    "score": 7,
+    "title": "StreamPI: Streaming Multimodal Temporal Modeling for Vision-Language-Action Models",
+    "authors": [
+      "Zhe Liu",
+      "Jinghua Hou",
+      "Yuxiang Lu",
+      "Zhenya Yang",
+      "Xianzhe Fan",
+      "Junwei Luo",
+      "Junyi Li",
+      "Ruihua Han",
+      "Zhi Hou",
+      "Hengshuang Zhao"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": null,
+    "code_url": null,
+    "summary_zh": "提出 StreamPI，为单帧 VLA（如 π0.5）引入流式多模态时序建模能力，通过指令锚定的时序注意力与随机间隔流式训练实现异步实机部署。在 LIBERO 与实机任务上超越 π0.5，且不增加任何参数。",
+    "reason": "面向 VLA 的流式时序建模框架，零额外参数、支持异步部署与随机间隔流式训练，对实时推理回路有明确效率贡献，但缺乏开源与顶会背书。",
+    "tweet_en": "StreamPI: streaming temporal modeling for VLA models with zero extra params — instruction-anchored attention + random-interval streaming training enables async real-robot deployment, beating π0.5 on LIBERO & real tasks. https://arxiv.org/abs/2608.26067",
+    "directions": [
+      "01-vla-wam-systems-serving",
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "vla",
+      "streaming-inference",
+      "temporal-modeling",
+      "real-time-control"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-26T17:33:19Z"
+  },
+  {
+    "arxiv_id": "2608.25659",
+    "slack_ts": "1787829274.631549",
+    "status": "pending",
+    "score": 7,
+    "title": "GaussianDream++: Efficient 3D Gaussian World Modeling for Robotic Manipulation",
+    "authors": [
+      "Yuqing Jiang",
+      "Zijian Zhang",
+      "Weitao Zhou",
+      "Jiawei Wang",
+      "Junjie He",
+      "Lei Yang",
+      "Haifang Qing",
+      "Si Liu",
+      "Ding Zhao",
+      "Ping Luo",
+      "Haibao Yu"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": null,
+    "code_url": null,
+    "summary_zh": "提出 GaussianDream++，在 VLA 主干中插入世界状态/预测 token，训练时解码为当前与未来的共享高斯基元表征，推理时仅保留 20 个 token 而不做在线高斯解码。LIBERO 达 98.6%，实机成功率从 29.2% 提升至 52.5%。",
+    "reason": "将 3D 高斯世界建模压缩为 20 个 world token 嵌入 VLA 主干，推理时移除渲染与解码路径保持高效闭环控制，效率导向明确且实机提升显著。",
+    "tweet_en": "GaussianDream++: policy-native 3D Gaussian world modeling via just 20 world tokens in the VLA backbone — no online decoding at inference, 98.6% on LIBERO, real-robot success up from 29.2%→52.5% over π0.5. https://arxiv.org/abs/2608.25659",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "vla",
+      "3d-gaussian",
+      "world-model",
+      "efficient-inference"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-26T11:41:55Z"
+  },
+  {
+    "arxiv_id": "2608.25479",
+    "slack_ts": "1787829274.719769",
+    "status": "pending",
+    "score": 7,
+    "title": "4DStreamCtrl: Interactive Video Generation with Online 4D Control",
+    "authors": [
+      "Shiqian Li",
+      "Chenguo Lin",
+      "Zhiguang Liu",
+      "Yu Tang",
+      "Jiarong Ou",
+      "Rui Chen",
+      "Yixin Zhu"
+    ],
+    "venue": null,
+    "max_author_hindex": 4,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "提出 4DStreamCtrl，用统一 3D 点轨迹表示实现相机与物体的联合在线控制，并将视频扩散模型蒸馏为因果流式学生，4 步去噪即可生成任意长视频。单卡 480p 达 20 FPS，数百帧保持时序一致，首次实现交互式 4D 可控流式生成。",
+    "reason": "将相机/物体/深度统一为 3D 点轨迹表示并蒸馏为因果流式学生模型，4 步去噪、20FPS、显存与长度无关，是明确的快速世界模型/高效视频生成工作。",
+    "tweet_en": "4DStreamCtrl: unified 3D point-track control for camera+objects, distilled into a causal streaming student — 4-step denoising, 20 FPS at 480p, length-independent memory. First interactive 4D-controllable streaming video generation. https://arxiv.org/abs/2608.25479",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "world-model",
+      "video-diffusion",
+      "distillation",
+      "streaming-generation",
+      "4d-control"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-26T07:49:39Z"
   }
 ]
