@@ -776,5 +776,36 @@
     ],
     "milestone_reason": "",
     "published": "2026-08-26T07:49:39Z"
+  },
+  {
+    "arxiv_id": "2608.27384",
+    "slack_ts": "1787921912.916019",
+    "status": "pending",
+    "score": 8,
+    "title": "FlashVLA: Streaming Action Decoding for Fast and Asynchronous VLA Inference",
+    "authors": [
+      "Zekai Li",
+      "Jiaming Tang",
+      "Zhijian Liu"
+    ],
+    "venue": null,
+    "max_author_hindex": 0,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "FlashVLA 提出流式动作缓冲与分块因果注意力，每次推理产出一个可执行动作块，并隐式保持动作连续性。在仿真与真机实验中实现单 GPU ≥30Hz 的平滑异步控制频率。",
+    "reason": "面向 flow-matching VLA 的流式动作解码框架，统一解决低延迟推理与平滑异步执行，单卡 ≥30Hz 实机控制，系统与效率贡献明确",
+    "tweet_en": "FlashVLA: streaming action decoding for VLA inference — a chunked action buffer at multiple noise levels yields one executable action chunk per step, enabling ≥30Hz smooth asynchronous control on a single GPU. https://arxiv.org/abs/2608.27384",
+    "directions": [
+      "01-vla-wam-systems-serving",
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "vla-inference",
+      "async-execution",
+      "action-chunking",
+      "real-time-control"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-27T17:19:29Z"
   }
 ]
