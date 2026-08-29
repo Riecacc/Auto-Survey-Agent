@@ -780,7 +780,7 @@
   {
     "arxiv_id": "2608.27384",
     "slack_ts": "1787921912.916019",
-    "status": "pending",
+    "status": "confirmed",
     "score": 8,
     "title": "FlashVLA: Streaming Action Decoding for Fast and Asynchronous VLA Inference",
     "authors": [
