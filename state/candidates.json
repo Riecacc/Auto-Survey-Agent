@@ -807,5 +807,145 @@
     ],
     "milestone_reason": "",
     "published": "2026-08-27T17:19:29Z"
+  },
+  {
+    "arxiv_id": "2608.30144",
+    "slack_ts": "1788243487.504819",
+    "status": "pending",
+    "score": 7,
+    "title": "Rethinking Language's Role in Efficient VLA for Autonomous Vehicles: Toward Smarter, Trustworthy Driving",
+    "authors": [
+      "Tongfei Guo",
+      "Lili Su"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "本文针对自动驾驶 VLA 中语言模块推理代价高的问题，提出 Language Residue 四级分类法（训练期监督、隐式推理、条件调用、逐帧生成），沿延迟、参数量、显存、FLOPs、token 五个部署轴系统梳理代表性方法，并分析 NLP/LLM 高效技术向自动驾驶的迁移约束。",
+    "reason": "EMNLP 主会综述，系统提出 Language Residue 分类法并沿延迟/显存/FLOPs/token 五个部署轴分析自动驾驶 VLA 的推理期语言开销，效率视角鲜明且承诺持续更新开源仓库，但属综述无原创技术。",
+    "tweet_en": "Rethinking Language's Role in Efficient VLA for Autonomous Driving (EMNLP'26): a 'Language Residue' taxonomy (L1-L4) organizing when/where language acts at inference, analyzed across latency, memory, FLOPs & tokens. https://arxiv.org/abs/2608.30144",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "efficient-vla",
+      "autonomous-driving",
+      "survey",
+      "language-taxonomy"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-31T01:51:51Z"
+  },
+  {
+    "arxiv_id": "2608.29910",
+    "slack_ts": "1788243487.719299",
+    "status": "pending",
+    "score": 7,
+    "title": "Matrix-Game 3.5: Enhancing Real-Time Streaming Interactive World Models with Patch Memory",
+    "authors": [
+      "Runjia Qian",
+      "Zile Wang",
+      "Jihai Zhang",
+      "Kai Zou",
+      "Wei Yu",
+      "Jiaxing Li",
+      "Zexiang Liu",
+      "Yaokun Li",
+      "Fei Kang",
+      "Kaichen Huang",
+      "Mengyin An",
+      "Haobo Zhang",
+      "Biao Jiang",
+      "Jiahua Wang",
+      "Haofeng Sun",
+      "Yang Liu",
+      "Yangguang Li"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "本文提出 Matrix-Game 3.5 实时交互世界模型：统一几何感知记忆框架（patch memory + tiled-PRoPE，零额外可学习参数）保证长时程几何一致与相机控制，静动态解耦表示维持主体一致性，两阶段渐进蒸馏将双向扩散模型转为少步因果生成器，实现分钟级实时开放世界交互。",
+    "reason": "Matrix-Game 3.5 通过无参数 patch memory、静动态解耦表示与两阶段实时蒸馏将双向扩散模型转为少步因果生成器，实现分钟级实时交互世界生成，对快速世界模型方向有实质效率贡献，且为 Matrix 系列延续工作。",
+    "tweet_en": "Matrix-Game 3.5: real-time streaming interactive world models with parameter-free patch memory + 3D projective conditioning, plus 2-stage distillation turning bidirectional diffusion into a few-step causal generator for minute-long real-time interaction. https://arxiv.org/abs/2608.29910",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "world-model",
+      "real-time-generation",
+      "distillation",
+      "interactive-simulation"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-30T17:11:00Z"
+  },
+  {
+    "arxiv_id": "2608.29768",
+    "slack_ts": "1788243488.000129",
+    "status": "pending",
+    "score": 7,
+    "title": "SmoothRL: Online Reinforcement Learning During Asynchronous Execution",
+    "authors": [
+      "Guang Gao",
+      "Yuxuan Nong",
+      "Baifu Huang",
+      "Jianan Wang"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "本文提出 SmoothRL，在异步推理回路中对预训练策略做在线 RL 微调：将每个动作块按帧索引划分为提交区、执行区与丢弃区，梯度仅经由执行区传播，使策略优化与异步执行诱导的轨迹分布对齐，在真机高精度与高动态任务上验证了可靠性。",
+    "reason": "SmoothRL 直面大模型高延迟下异步推理与在线 RL 的耦合问题，将动作块按提交/执行/丢弃三区建模并仅对执行区回传梯度，是实时控制回路方向少见的系统-算法协同工作，且有真机高动态任务验证。",
+    "tweet_en": "SmoothRL: online RL during asynchronous robot execution—partition action chunks into committed/executed/discarded regions and backprop only through executed actions, aligning value-gradient updates with the async trajectory distribution. https://arxiv.org/abs/2608.29768",
+    "directions": [
+      "01-vla-wam-systems-serving"
+    ],
+    "tags": [
+      "online-rl",
+      "async-inference",
+      "real-time-control",
+      "action-chunking"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-30T12:56:09Z"
+  },
+  {
+    "arxiv_id": "2608.29749",
+    "slack_ts": "1788243488.208599",
+    "status": "pending",
+    "score": 7,
+    "title": "DriftingVLA: Native One-Step Vision-Language-Action Generation via Per-Dimension Temporal Drifting",
+    "authors": [
+      "Yuxuan Gao",
+      "Shiqi Zhang",
+      "Yedong Shen",
+      "Yifan Duan",
+      "Wenhao Yu",
+      "Xin Zhang",
+      "Siyuan Cao",
+      "Jiajun Deng",
+      "Yanyong Zhang"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "本文提出 DriftingVLA，以分布漂移目标学习噪声到动作块的直接映射，实现单次前向生成完整动作块；逐维时间漂移（PDTD）将各动作维的完整时间轨迹作为独立漂移单元做细粒度分布建模，在 LIBERO 达 98.32% 成功率并带来 3.36 倍动作块生成加速。",
+    "reason": "DriftingVLA 用分布漂移目标实现原生单步动作块生成并配逐维时间漂移建模，3.36× 推理加速且在 LIBERO/RoboTwin/真机双臂任务上超越多步 flow 基线，是高效动作头方向的扎实工作。",
+    "tweet_en": "DriftingVLA: native one-step VLA action generation—distribution-drifting objective + per-dimension temporal drifting yields a full action chunk in one forward pass, 3.36x faster with 98.3% on LIBERO. https://arxiv.org/abs/2608.29749",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "one-step-vla",
+      "action-head",
+      "flow-matching",
+      "inference-speedup"
+    ],
+    "milestone_reason": "",
+    "published": "2026-08-30T12:21:44Z"
   }
 ]
