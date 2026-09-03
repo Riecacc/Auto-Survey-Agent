@@ -947,5 +947,83 @@
     ],
     "milestone_reason": "",
     "published": "2026-08-30T12:21:44Z"
+  },
+  {
+    "arxiv_id": "2609.02886",
+    "slack_ts": "1788414878.816449",
+    "status": "pending",
+    "score": 8,
+    "title": "SolarWM: Open Data and Scalable Training for Long-Horizon Video World Models",
+    "authors": [
+      "Junchao Huang",
+      "Guian Fang",
+      "Shengju Qian",
+      "Xianghao Kong",
+      "Zhuoran Zhao",
+      "Wei Huang",
+      "Yihua Du",
+      "Zixin Zhang",
+      "Justin Cui",
+      "Yuchao Gu",
+      "Yukang Chen",
+      "Xinting Hu",
+      "Tianyu He",
+      "Shaoshuai Shi",
+      "Zhuotao Tian",
+      "Xin Wang",
+      "Mike Zheng Shou",
+      "Li Jiang"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": null,
+    "code_url": null,
+    "summary_zh": "SolarWM 提供从数据准备到长时程推理的全开源世界模型基础，包含可重构多源数据引擎（143万条统一格式的视频片段）和骨干原生适配框架。基于 Wan2.2 等骨干实例化 5B-33B 四个模型，通过三阶段训练配方实现仅从 5 秒序列训练即可进行分钟到小时级的实时交互 rollout。",
+    "reason": "全开源的视频世界模型数据引擎与训练框架，统一多源数据契约并通过蒸馏实现实时长时程交互，对世界模型训练与推理基础设施有实质贡献。",
+    "tweet_en": "SolarWM: a fully open foundation for interactive video world models — 1.43M canonical clips from 10 datasets, backbone-native adaptation for Wan2.2/LTX-2.5/MiniMax-H3 (5B-33B), and real-time rollouts over minutes to hours trained on just 5s sequences. https://arxiv.org/abs/2609.02886",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "world-model",
+      "video-generation",
+      "open-source",
+      "distillation",
+      "real-time"
+    ],
+    "milestone_reason": "",
+    "published": "2026-09-02T17:59:41Z"
+  },
+  {
+    "arxiv_id": "2609.00908",
+    "slack_ts": "1788414879.004769",
+    "status": "pending",
+    "score": 7,
+    "title": "Knowing When to Stop: Adaptive Action Chunking via Internal Cross-Attention Dynamics in VLAs",
+    "authors": [
+      "Runze Xu",
+      "Xiaolong Shan",
+      "Shuang Dai",
+      "Yu Wang",
+      "Jincheng Yu"
+    ],
+    "venue": null,
+    "max_author_hindex": 2,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "论文发现随预测时域延伸，动作到观测的交叉注意力趋于分散、熵上升至平台期，与预测误差升高相关。据此提出免训练截断机制，检测高熵平台期并动态选择执行时域，在 pi0.5 和 X-VLA 上超越固定时域与自适应基线。",
+    "reason": "利用动作专家内部交叉注意力熵作为免训练的在线信号自适应选择执行时域，几乎零开销地改善 VLA 推理效率与成功率，符合高效 VLA 方向。",
+    "tweet_en": "Adaptive action chunking for VLAs: rising cross-attention entropy in the action expert signals when open-loop execution should stop — training-free truncation picks the execution horizon online with negligible overhead, improving success on pi0.5/X-VLA. https://arxiv.org/abs/2609.00908",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "vla",
+      "action-chunking",
+      "adaptive-inference",
+      "training-free"
+    ],
+    "milestone_reason": "",
+    "published": "2026-09-01T08:38:16Z"
   }
 ]
