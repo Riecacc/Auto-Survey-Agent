@@ -997,7 +997,7 @@
   {
     "arxiv_id": "2609.00908",
     "slack_ts": "1788414879.004769",
-    "status": "pending",
+    "status": "confirmed",
     "score": 7,
     "title": "Knowing When to Stop: Adaptive Action Chunking via Internal Cross-Attention Dynamics in VLAs",
     "authors": [
@@ -1025,5 +1025,35 @@
     ],
     "milestone_reason": "",
     "published": "2026-09-01T08:38:16Z"
+  },
+  {
+    "arxiv_id": "2609.03715",
+    "slack_ts": "1788501654.978549",
+    "status": "pending",
+    "score": 7,
+    "title": "MINERVA: How Small Can a Manipulation Policy Be and Still Solve LIBERO?",
+    "authors": [
+      "Kohei Sendai",
+      "Tatsuya Matsushima",
+      "Yusuke Iwasawa"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "MINERVA 系统测量 LIBERO 基准的任务容量下限：0.54M 参数策略即达 95.1% 成功率，且发现 flow matching 相对 L1 回归无优势而慢 3.8 倍。研究还揭示 LIBERO 指令条件主要是任务记忆选择，为容量感知设计与蒸馏提供了实证基础。",
+    "reason": "系统研究 VLA 模型容量下限，0.54M 参数策略在笔记本 CPU 上 5-9ms 推理、比 π0.5 快 1400 倍，对部署高效的机器人策略设计有直接指导意义，契合高效算法方向。",
+    "tweet_en": "MINERVA: a 0.54M-param policy solves LIBERO at 95.1%, running on laptop CPU 1,400× faster than π0.5. Flow matching shows no edge over L1 regression. Rethinking VLA capacity floors. https://arxiv.org/abs/2609.03715",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "efficient-vla",
+      "model-scaling",
+      "edge-inference",
+      "libero"
+    ],
+    "milestone_reason": "",
+    "published": "2026-09-03T11:51:10Z"
   }
 ]
