@@ -1055,5 +1055,68 @@
     ],
     "milestone_reason": "",
     "published": "2026-09-03T11:51:10Z"
+  },
+  {
+    "arxiv_id": "2609.08230",
+    "slack_ts": "1788933915.111699",
+    "status": "pending",
+    "score": 7,
+    "title": "ActionSplice: In-Flight Action Editing for Interactive World Models",
+    "authors": [
+      "Pardis Taghavi",
+      "Tingyu Guo",
+      "Jonas Lossner",
+      "Gaurav Pandey",
+      "Reza Langari"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "提出 ActionSplice 推理框架，将采样中途动作更新建模为反事实状态传输问题，轻量校正器在冻结的世界模型上直接迁移中间表征，避免回滚。在两个视频世界模型上显著降低 LPIPS 并实现 1.69–2.73 倍像素就绪加速。",
+    "reason": "面向交互式世界模型的推理框架，通过反事实状态传输避免动作更新时的回滚重算，带来最高 2.73× 推理加速，属于以效率为目标的快速世界模型方向。",
+    "tweet_en": "ActionSplice: counterfactual state transport lets interactive video world models apply mid-sampling action edits without rollback—up to 2.73× faster pixel-ready output. https://arxiv.org/abs/2609.08230",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "world-model",
+      "inference-efficiency",
+      "interactive-simulation"
+    ],
+    "milestone_reason": "",
+    "published": "2026-09-08T04:21:36Z"
+  },
+  {
+    "arxiv_id": "2609.07838",
+    "slack_ts": "1788933915.309759",
+    "status": "pending",
+    "score": 7,
+    "title": "ComVLA: Communication-Aware Split Inference for VLA Models in 6G-Connected Robotics",
+    "authors": [
+      "Boliang Liu",
+      "Wint Yi Poe",
+      "Jingyun Di",
+      "Riccardo Trivisonno",
+      "Giuseppe Caire"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "提出 ComVLA，利用语言语义指导 VLA 视觉 token 预算以适配无线信道容量，实现通信感知的分离推理。在 LIBERO 上仅传 32 个 token，计算降 74%、延迟降 22%，成功率仅损失 1.5 个百分点。",
+    "reason": "面向 6G 连接机器人的 VLA 分离推理框架，根据信道容量用语言引导自适应调节视觉 token 预算，是端云协同部署的典型协同设计工作（GLOBECOM 2026）。",
+    "tweet_en": "ComVLA: communication-aware split inference for VLA in 6G robotics—language-guided token budgeting adapts to channel capacity, -74% compute at ~1.5pp success cost. https://arxiv.org/abs/2609.07838",
+    "directions": [
+      "01-vla-wam-systems-serving"
+    ],
+    "tags": [
+      "vla-serving",
+      "split-inference",
+      "semantic-communication",
+      "edge-cloud"
+    ],
+    "milestone_reason": "",
+    "published": "2026-09-07T18:00:14Z"
   }
 ]
