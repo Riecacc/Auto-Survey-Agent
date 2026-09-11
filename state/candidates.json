@@ -1118,5 +1118,77 @@
     ],
     "milestone_reason": "",
     "published": "2026-09-07T18:00:14Z"
+  },
+  {
+    "arxiv_id": "2609.10915",
+    "slack_ts": "1789106733.059419",
+    "status": "pending",
+    "score": 8,
+    "title": "IMLE-VLA: Fast Single-Step Action Generation for Vision-Language-Action Policies",
+    "authors": [
+      "Kian Hosseinkhani",
+      "Qinhe Peng",
+      "George Shramko",
+      "Mehran Aghabozorgi",
+      "Jianing Qian",
+      "Tristan Engst",
+      "Alireza Moazeni",
+      "Dinesh Jayaraman",
+      "Ke Li"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "提出 IMLE-VLA，用基于条件 IMLE 的单步条件生成器替代迭代式动作头，消除多步采样瓶颈。应用于 π0.5 时推理频率提升至 55Hz（3.67 倍），LIBERO 40 任务平均成功率 98.0%，真机运动更平滑、完成更快。",
+    "reason": "IROS 2026 接收，用 cIMLE 单步生成头替代迭代 diffusion/flow 采样，推理频率提升 3.67 倍且 LIBERO 达 98.0% SOTA，是高效动作头方向的扎实工作。",
+    "tweet_en": "IMLE-VLA (IROS 2026): single-step cIMLE action head replaces iterative flow/diffusion sampling in VLAs — 3.67x faster inference (55Hz), 98.0% on LIBERO, smoother real-robot motion. https://arxiv.org/abs/2609.10915",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "vla",
+      "action-head",
+      "single-step-generation",
+      "imle",
+      "real-time"
+    ],
+    "milestone_reason": "",
+    "published": "2026-09-10T00:00:32Z"
+  },
+  {
+    "arxiv_id": "2609.11561",
+    "slack_ts": "1789106733.145369",
+    "status": "pending",
+    "score": 7,
+    "title": "Memory as Plans: World-Action Modeling with Memory-Grounded Planning",
+    "authors": [
+      "Sizhe Zhao",
+      "Haozhe Xie",
+      "Weiyu Zhao",
+      "Chenchu Zhang",
+      "Huan Wang",
+      "Chenyang Wang",
+      "Qinglin Liu",
+      "Shengping Zhang"
+    ],
+    "venue": null,
+    "max_author_hindex": null,
+    "citation_count": 0,
+    "code_url": null,
+    "summary_zh": "提出 MaP-WAM，将依赖记忆的世界-动作建模分解为记忆锚定规划与计划条件执行，执行器上下文长度固定并支持 KV 缓存。在 RMBench 达 83.3% 成功率，真机 78.0%，且推理延迟不随历史增长。",
+    "reason": "通过记忆-规划分解与 KV 缓存使 WAM 执行器延迟随历史增长保持恒定，兼具长程任务 SOTA 与明确的推理效率贡献，契合 fast WAM 方向。",
+    "tweet_en": "MaP-WAM: Memory-as-Plans world-action modeling with KV-cacheable planning/execution, keeping executor latency ~constant as task history grows. SOTA 83.3% on RMBench. https://arxiv.org/abs/2609.11561",
+    "directions": [
+      "03-vla-wam-efficient-algorithms"
+    ],
+    "tags": [
+      "world-action-model",
+      "memory-planning",
+      "kv-cache",
+      "long-horizon"
+    ],
+    "milestone_reason": "",
+    "published": "2026-09-10T13:52:51Z"
   }
 ]
